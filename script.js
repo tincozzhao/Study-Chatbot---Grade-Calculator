@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
 
     // Call backend
-    const url = `http://127.0.0.1:80/grade_predictor?attendance=${encodeURIComponent(a)}&study=${encodeURIComponent(s)}&previous=${encodeURIComponent(p)}&gender=${encodeURIComponent(g)}&parental=${encodeURIComponent(parent)}`;
+    const url = `https://study-chatbot-grade-calculator.onrender.com/grade_predictor?attendance=${encodeURIComponent(a)}&study=${encodeURIComponent(s)}&previous=${encodeURIComponent(p)}&gender=${encodeURIComponent(g)}&parental=${encodeURIComponent(parent)}`;
     fetch(url)
       .then(r => r.json())
       .then(data => {
