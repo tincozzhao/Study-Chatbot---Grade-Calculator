@@ -17,11 +17,11 @@ def grade_predictor():
     X = df[['AttendanceRate', 'StudyHoursPerWeek', 'PreviousGrade']]
     Y = df[['FinalGrade']]
 
-    le = LabelEncoder()
-    gender_Encoded = le.fit_transform(df['Gender'])
-    X['Gender'] = gender_Encoded
-    ParentalSupport_Encoded = le.fit_transform(df['ParentalSupport'])
-    X['ParentalSupport'] = ParentalSupport_Encoded
+    # le = LabelEncoder()
+    # gender_Encoded = le.fit_transform(df['Gender'])
+    # X['Gender'] = gender_Encoded
+    # ParentalSupport_Encoded = le.fit_transform(df['ParentalSupport'])
+    # X['ParentalSupport'] = ParentalSupport_Encoded
 
     model = linear_model.LinearRegression()
     model.fit(X, Y)
@@ -37,13 +37,13 @@ def grade_predictor():
         return jsonify({'error': 'Invalid input', 'details': str(e)}), 400
 
     # Encode gender and parental support using same label encoder
-    gender_map = {v: le.transform([v])[0] if v in df['Gender'].unique() else 0 for v in ['male','female']}
-    parental_map = {v: le.transform([v])[0] if v in df['ParentalSupport'].unique() else 0 for v in ['low', 'medium', 'high']}
-    gender_encoded = gender_map.get(gender, 0)
-    parental_encoded = parental_map.get(parental, 0)
+    # gender_map = {v: le.transform([v])[0] if v in df['Gender'].unique() else 0 for v in ['male','female']}
+    # parental_map = {v: le.transform([v])[0] if v in df['ParentalSupport'].unique() else 0 for v in ['low', 'medium', 'high']}
+    # gender_encoded = gender_map.get(gender, 0)
+    # parental_encoded = parental_map.get(parental, 0)
 
     # Predict
-    pred = model.predict([[attendance, study, previous, gender_encoded, parental_encoded]])
+    pred = model.predict([[attendance, study, previous ]])
     try:
         pred_val = float(pred[0][0])
     except Exception:
